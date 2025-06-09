@@ -1,1 +1,34 @@
+<?php
+
+    // 關閉錯誤訊息顯示
+    error_reporting(0);
+
+    // 啟用 Session 功能
+    session_start();
+
+    // 檢查是否登入
+    if (!$_SESSION["id"]) {
+        echo "請登入帳號";
+        echo "<meta http-equiv=REFRESH content='3, url=2.login.html'>";
+    }
+    else {   
+        // 已登入，建立資料庫連線
+        $conn = mysqli_connect("db4free.net", "immust", "immustimmust", "immust");
+
+        // 執行修改密碼的 SQL 命令（根據帳號 ID 更新密碼欄位）
+        $sql = "update user set pwd='{$_POST['pwd']}' where id='{$_POST['id']}'";
+
+        // 若執行失敗
+        if (!mysqli_query($conn, $sql)) {
+            echo "修改錯誤";
+            // 三秒後導回使用者管理頁面
+            echo "<meta http-equiv=REFRESH content='3, url=18.user.php'>";
+        }
+        else {
+            echo "修改成功，三秒鐘後回到網頁";
+            echo "<meta http-equiv=REFRESH content='3, url=18.user.php'>";
+        }
+    }
+
+?>
 
