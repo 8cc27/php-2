@@ -1,1 +1,20 @@
+<?php
+    // 關閉錯誤訊息顯示
+    error_reporting(0);
+
+    // 啟用 Session 機制
+    session_start();
+
+    // 檢查是否登入
+    if (!$_SESSION["id"]) {
+        echo "please login first";
+        echo "<meta http-equiv=REFRESH content='3, url=2.login.html'>";
+    }
+    else {
+        // 已登入者，連接資料庫
+        $conn = mysqli_connect("db4free.net", "immust", "immustimmust", "immust");
+
+        // 撰寫新增佈告的 SQL 指令（將使用者輸入的標題、內容、類型與時間寫入 bulletin 資料表）
+        $sql = "insert into bulletin(title, content, type, time) 
+                values('{$_POST['title']}', '{$_POST['content']}', {$_POST_
 
