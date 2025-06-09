@@ -1,1 +1,22 @@
+<?php
+    // 關閉錯誤訊息顯示
+    error_reporting(0);
+
+    // 啟用 Session
+    session_start();
+
+    // 檢查是否登入
+    if (!$_SESSION["id"]) {
+        echo "please login first";
+        echo "<meta http-equiv=REFRESH content='3, url=2.login.html'>";
+    }
+    else {
+        // 已登入，連接資料庫
+        $conn = mysqli_connect("db4free.net", "immust", "immustimmust", "immust");
+
+        // 根據 URL 傳入的 bid（佈告編號）查詢佈告內容
+        $result = mysqli_query($conn, "select * from bulletin where bid={$_GET["bid"]}");
+        $row = mysqli_fetch_array($result); // 把結果存入 $row 陣列
+
+        // 根據佈告類型設置對應的單選按鈕被勾選
 
