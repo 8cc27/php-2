@@ -1,1 +1,18 @@
+<?php
+    // 關閉錯誤訊息顯示
+    error_reporting(0);
+
+    // 啟用 session 功能
+    session_start();
+
+    // 檢查是否已登入
+    if (!$_SESSION["id"]) {
+        echo "請登入帳號";
+        echo "<meta http-equiv=REFRESH content='3, url=2.login.html'>";
+    }
+    else {   
+        // 建立資料庫連線
+        $conn = mysqli_connect("db4free.net", "immust", "immustimmust", "immust");
+
+        // 執行更新 SQL 指令（將使用者輸入
 
