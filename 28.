@@ -1,1 +1,34 @@
+<?php
+    // 關閉錯誤訊息
+    error_reporting(0);
+
+    // 啟用 Session
+    session_start();
+
+    // 若尚未登入，跳回登入頁
+    if (!$_SESSION["id"]) {
+        echo "請登入帳號";
+        echo "<meta http-equiv=REFRESH content='3, url=2.login.html'>";
+    }
+    else {   
+        // 已登入，建立資料庫連線
+        $conn = mysqli_connect("db4free.net", "immust", "immustimmust", "immust");
+
+        // 撰寫刪除指令（從 bulletin 表中刪除指定 bid 的佈告）
+        $sql = "DELETE FROM bulletin WHERE bid='{$_GET["bid"]}'";
+
+        // 若有需要除錯可取消註解：
+        // echo $sql;
+
+        // 執行刪除指令，回報結果
+        if (!mysqli_query($conn, $sql)) {
+            echo "佈告刪除錯誤";
+        } else {
+            echo "佈告刪除成功";
+        }
+
+        // 3 秒後回佈告欄主頁
+        echo "<meta http-equiv=REFRESH content='3, url=11.bulletin.php'>";
+    }
+?>
 
