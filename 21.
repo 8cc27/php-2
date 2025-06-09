@@ -1,1 +1,26 @@
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>登入範例</title>
+    </head>
+    <body>
+
+<?php 
+    // 印出從表單送過來的帳號與密碼（用於測試用，正式上線記得移除！）
+    echo $_POST["id"];
+    echo "<br>";
+    echo $_POST["pwd"];
+?>                
+
+        <!-- 登入表單，會把帳號密碼 POST 到 2.login.php -->
+        <form method="post" action="2.login.php">
+            帳號：<input type="text" name="id"><br />
+            密碼：<input type="password" name="pwd"><p></p>
+
+            <!-- 提交與清除按鈕 -->
+            <input type="submit" value="登入"> 
+            <input type="reset" value="清除">
+        </form>
+    </body>
+</html>
 
